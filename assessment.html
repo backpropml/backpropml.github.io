@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Production readiness assessment - Backprop</title>
+<meta name="description" content="A one-week, $5,000 review of one ML system: reproducibility, pipeline, evaluation, serving, monitoring and data. Credited in full against implementation within 60 days.">
+<link rel="canonical" href="https://backpropml.github.io/assessment.html">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Production readiness assessment - Backprop">
+<meta property="og:description" content="One week, one system, $5,000 fixed. Findings ranked by risk, a remediation plan you can staff, and the fee credited in full against implementation.">
+<meta property="og:url" content="https://backpropml.github.io/assessment.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%230d7a61'/%3E%3Cpath%20d='M7%2023h6v-7h6v-7h6'%20fill='none'%20stroke='%23ffffff'%20stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="wordmark" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity=".1"/>
+        <path d="M7 23h6v-7h6v-7h6" pathLength="100" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      </svg>
+      Backprop
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#work">Work</a>
+      <a href="assessment.html" aria-current="page">Assessment</a>
+      <a href="index.html#approach">Approach</a>
+      <a href="index.html#team">Team</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========================== PAGE HERO ========================= -->
+  <section class="page-hero">
+    <div class="wrap">
+      <a class="backlink" href="index.html"><span aria-hidden="true">&larr;</span> Backprop</a>
+     <div class="hero-panel">
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+      <span class="eyebrow" data-reveal>Fixed scope &middot; fixed price</span>
+      <h1 class="lines">
+        <span class="line"><span>Production readiness</span></span>
+        <span class="line"><span>assessment</span></span>
+      </h1>
+      <p class="lede" data-reveal>
+        One week. One system. We read what you have built, find what stands between it and
+        production, and hand you a ranked list of the work with what each item costs. If you
+        commission that work from us within 60 days, the fee comes off the first invoice in
+        full.
+      </p>
+      <div class="btn-row mt-md" data-reveal>
+        <a class="btn btn--primary" href="mailto:hello@backpropml.com?subject=Production%20readiness%20assessment">
+          <span>Start an assessment</span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="btn btn--ghost" href="#faq"><span>Questions first</span></a>
+      </div>
+      <p class="terms" data-reveal>
+        <span>$5,000</span>
+        <span>5 working days</span>
+        <span>1 system</span>
+        <span>2 engineers</span>
+      </p>
+     </div>
+    </div>
+  </section>
+
+  <!-- =========================== SCOPE ============================ -->
+  <section class="section" id="scope">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">What we look at</span>
+        <h2>Six areas, in the order they tend to hurt.</h2>
+        <p class="lede">
+          The assessment covers one system end to end - a model you want to deploy, a
+          pipeline that keeps breaking, or a prototype that has to become a product. We are
+          looking for the things that will page someone at 3am, not for style points.
+        </p>
+      </div>
+
+      <div class="grid grid--2" data-reveal data-stagger>
+        <div class="cell">
+          <span class="cell__n">01 &middot; Reproducibility</span>
+          <h3>Can it be rebuilt without you?</h3>
+          <p>
+            Whether the current model can be reproduced from data and code by an engineer who
+            did not write it. Pinned environments, seeds, data snapshots, and whether the
+            artifact in production matches anything in your repository.
+          </p>
+        </div>
+
+        <div class="cell">
+          <span class="cell__n">02 &middot; Pipeline</span>
+          <h3>What runs unattended, and how it fails.</h3>
+          <p>
+            Training and inference paths, orchestration, scheduling and retries. Where state
+            lives, which steps are idempotent, what happens when one dies halfway, and how
+            long you would take to notice.
+          </p>
+        </div>
+
+        <div class="cell">
+          <span class="cell__n">03 &middot; Evaluation</span>
+          <h3>Is the metric the one you care about?</h3>
+          <p>
+            The validation strategy, the split, and the distance between your offline number
+            and the business outcome. Leakage, temporal ordering, and whether a good score is
+            measuring generalization or measuring your test set. A leaderboard is not
+            generalization, and we have paid to learn that.
+          </p>
+        </div>
+
+        <div class="cell">
+          <span class="cell__n">04 &middot; Serving</span>
+          <h3>Latency, cost, versioning, rollback.</h3>
+          <p>
+            How inferences are served and what they cost per request. Batch versus online,
+            model versioning, the rollback path, and what happens to traffic while a bad model
+            is being taken out.
+          </p>
+        </div>
+
+        <div class="cell">
+          <span class="cell__n">05 &middot; Monitoring</span>
+          <h3>Would you even know?</h3>
+          <p>
+            Concept and performance drift, input distribution checks, and whether your alerts
+            fire on things that matter. If the model silently degrades over a quarter, we want
+            to know which graph moves first.
+          </p>
+        </div>
+
+        <div class="cell">
+          <span class="cell__n">06 &middot; Data</span>
+          <h3>Lineage, freshness and what breaks upstream.</h3>
+          <p>
+            Where features and labels come from, how stale they are by the time the model sees
+            them, and which upstream change silently poisons the whole thing. Label quality
+            gets the same scrutiny as model code.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ WEEK ============================ -->
+  <section class="section section--sunk" id="week">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">The week</span>
+        <h2>What actually happens.</h2>
+        <p class="lede">
+          Both of us work the engagement. You will hear from us on day one and day four
+          whether or not you ask.
+        </p>
+      </div>
+
+      <div class="split">
+        <div>
+          <ol class="timeline" data-reveal="left">
+            <li>
+              <b>Day 1 &middot; Access and orientation</b>
+              <p>
+                A 60-minute kickoff: what the system does, what production means for you, and
+                what is forcing the timeline. We take read access and start reading.
+              </p>
+            </li>
+            <li>
+              <b>Days 2-3 &middot; Deep review</b>
+              <p>
+                The six areas above, in your code and your infrastructure. We run what we can
+                run, reproduce what we can reproduce, and write down every assumption we are
+                making so you can correct us.
+              </p>
+            </li>
+            <li>
+              <b>Day 4 &middot; Findings and verification</b>
+              <p>
+                We draft the findings and take them to one of your engineers before they
+                harden. Anything we got wrong about your system gets fixed here, not in the
+                final document.
+              </p>
+            </li>
+            <li>
+              <b>Day 5 &middot; Report and walkthrough</b>
+              <p>
+                The written assessment lands, followed by a 90-minute session with your team
+                to argue with it. You leave with a plan you can staff on Monday.
+              </p>
+            </li>
+          </ol>
+        </div>
+
+        <div>
+          <div class="card tilt" data-reveal="right" data-glow>
+            <div class="card__head"><b>Deliverables</b><span>yours to keep</span></div>
+            <ol class="spec" data-stagger>
+              <li><span class="n">&#9642;</span><span class="t">Written assessment</span><span class="d">Every finding ranked by risk, each with the fix and what it costs to make</span></li>
+              <li><span class="n">&#9642;</span><span class="t">Remediation plan</span><span class="d">Prioritized, with effort estimates, in an order you can actually staff</span></li>
+              <li><span class="n">&#9642;</span><span class="t">Walkthrough</span><span class="d">90 minutes with your engineers, not a management summary</span></li>
+              <li><span class="n">&#9642;</span><span class="t">Landed fixes</span><span class="d">Anything small enough to fix inside the week, we fix and hand back</span></li>
+            </ol>
+          </div>
+
+          <div class="card tilt mt-md" data-reveal="right" data-glow>
+            <div class="card__head"><b>What we need from you</b><span>3 things</span></div>
+            <ol class="spec" data-stagger>
+              <li><span class="n">01</span><span class="t">Read access</span><span class="d">The repository and, where possible, the pipeline and its logs</span></li>
+              <li><span class="n">02</span><span class="t">Two hours of an engineer</span><span class="d">Spread across the week - someone who knows why it is built that way</span></li>
+              <li><span class="n">03</span><span class="t">A stated goal</span><span class="d">What &ldquo;in production&rdquo; has to mean for this system, in your words</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================== PRICE ============================ -->
+  <section class="section" id="price">
+    <div class="wrap">
+      <div class="offer" data-reveal="scale">
+        <div>
+          <h2 class="sr-only">Price and terms</h2>
+          <span class="eyebrow" aria-hidden="true">Price and terms</span>
+          <p class="price"><b data-count="5000" data-prefix="$">$5,000</b><em>FIXED</em></p>
+          <p class="note">
+            Not an estimate and not a day rate. If the week runs long, that is our problem.
+            Invoiced 50% to hold the week and 50% on delivery, net 14. USD, exclusive of any
+            applicable taxes.
+          </p>
+          <div class="btn-row mt-md">
+            <a class="btn btn--primary" href="mailto:hello@backpropml.com?subject=Production%20readiness%20assessment">
+              <span>Start an assessment</span>
+              <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+        <div class="stack">
+          <h3>Credited in full</h3>
+          <p class="note">
+            If you commission implementation work from us within <strong>60 days</strong> of
+            the report, the entire $5,000 is credited against your first invoice. Take the
+            plan and do the work in-house and you owe us nothing further - that is a
+            perfectly good outcome, and it is why the assessment is priced the way it is.
+          </p>
+          <h3 class="mt-md">If it is not the right fit</h3>
+          <p class="note">
+            If the first conversation makes clear that an assessment would not help you, we
+            will say so before you pay for one. We would rather turn down a week than sell
+            you a document you did not need.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FAQ ============================= -->
+  <section class="section section--sunk" id="faq">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Questions</span>
+        <h2>Before you email.</h2>
+      </div>
+
+      <div class="faq readable" data-reveal>
+        <details>
+          <summary>Do you need production access?</summary>
+          <div class="answer">
+            <p>
+              Usually not. Read access to the repository, plus a description of how the system
+              is deployed and access to logs or dashboards, covers most of it. Where we do need
+              more, we will ask for the narrowest thing that works and tell you why.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>We do not have a model in production yet. Is this still for us?</summary>
+          <div class="answer">
+            <p>
+              Yes, as long as something exists. A notebook that works, a prototype that has to
+              become a product, a pipeline half-built - all fine.
+            </p>
+            <p>
+              If the problem is still open and there is no model at all, the assessment is the
+              wrong first purchase. That is research and prototyping: a baseline, an honest
+              evaluation of whether the approach can work, and a prototype worth arguing about.
+              We scope that per problem and quote before starting - usually a two-week
+              feasibility sprint: a first honest baseline, a straight answer on whether the
+              approach can work at all, and a written go/no-go. Same terms as the assessment,
+              and credited the same way if you go ahead.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Who does the work?</summary>
+          <div class="answer">
+            <p>
+              Both of us, on every engagement. Haseeb leads the production engineering and is
+              accountable for what ships; Mohibullah leads the modeling and evaluation.
+              No work goes to anyone outside the two of us, and there is nobody between you
+              and the people writing the code.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>What does implementation look like afterwards?</summary>
+          <div class="answer">
+            <p>
+              Quoted as fixed-price milestones taken straight from the remediation plan, so
+              you are buying against a list you have already read rather than signing an
+              open-ended retainer. Most of it is pipeline, evaluation and monitoring work;
+              some of it is modeling. First engagements typically run two to six weeks, and
+              nothing starts before you have the number in writing. Your $5,000 comes off the
+              first invoice.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Will you sign an NDA?</summary>
+          <div class="answer">
+            <p>
+              Yes - send yours and we will sign it. We do not make clients use our
+              paper. The only clauses we come back on are blanket non-competes, uncapped
+              liability, and IP assignment drafted broadly enough to swallow tools we already
+              own. If you would rather not draft anything, we can send a short mutual NDA
+              instead.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Where are you, and which hours do you work?</summary>
+          <div class="answer">
+            <p>
+              Backprop LLC is a US company, working across US, UK and Pakistan time zones.
+              In practice that gives a working day of roughly <strong>04:00-17:00
+              UTC</strong> - full cover for the UK and Europe, the whole US Eastern
+              morning, and the US Pacific coast until mid-morning.
+            </p>
+            <p>
+              On-site weeks in the US are available where they would genuinely help. If you
+              need a standing slot outside our usual window, say so early - we would
+              rather fix it up front than miss you by five hours.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Can you share past client work?</summary>
+          <div class="answer">
+            <p>
+              Backprop is a new practice and has none to show. Everything on this site labelled
+              as prior work is <strong>employment</strong> - at Google, the University of
+              Oxford, The Home Depot, Afiniti and Noon Academy - not Backprop client
+              engagements, and none of those organizations endorse us.
+            </p>
+            <p>
+              What we can do instead is talk through the technical detail of that work in a
+              call, and point you at what is public: open-source contributions, a granted
+              patent, and published competition results.
+            </p>
+          </div>
+        </details>
+      </div>
+
+      <div class="btn-row mt-lg">
+        <a class="btn btn--primary" href="mailto:hello@backpropml.com?subject=Production%20readiness%20assessment">
+          <span>Start an assessment</span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="btn btn--ghost" href="index.html#team"><span>Meet the two of us</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p>&copy; 2026 <strong>Backprop LLC</strong> &middot; ML infrastructure</p>
+    <nav aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="index.html#team">Team</a>
+      <a href="mailto:hello@backpropml.com?subject=Backprop%20enquiry">Email</a>
+      <a href="#main">Top</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Presentation only. See motion.js - the site is complete without it. -->
+<script src="motion.js" defer></script>
+
+</body>
+</html>

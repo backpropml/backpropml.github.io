@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backprop - ML infrastructure + research</title>
+<meta name="description" content="A two-person ML infrastructure and research practice. We take machine learning and LLM systems from prototype to production: evaluation, serving, monitoring.">
+<link rel="canonical" href="https://backpropml.github.io/">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Backprop - ML infrastructure + research">
+<meta property="og:description" content="From prototype to production, without the rewrite. A production readiness assessment in one week, credited in full against implementation.">
+<meta property="og:url" content="https://backpropml.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%230d7a61'/%3E%3Cpath%20d='M7%2023h6v-7h6v-7h6'%20fill='none'%20stroke='%23ffffff'%20stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="wordmark" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="7" fill="currentColor" opacity=".1"/>
+        <path d="M7 23h6v-7h6v-7h6" pathLength="100" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      </svg>
+      Backprop
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="#approach">Approach</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="wrap">
+     <div class="hero-panel">
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="hero__grid">
+
+        <div data-stagger>
+          <span class="eyebrow" data-reveal>ML infrastructure + research</span>
+          <h1 class="lines">
+            <span class="line"><span>From prototype</span></span>
+            <span class="line"><span>to production,</span></span>
+            <span class="line"><span>without the rewrite.</span></span>
+          </h1>
+          <p class="lede" data-reveal>
+            Backprop is a two-person ML infrastructure practice. We take a problem from
+            research and prototype through to a production pipeline - training that runs
+            unattended, evaluation that generalizes, serving that holds up, and monitoring
+            that catches drift.
+          </p>
+          <div class="btn-row" data-reveal>
+            <a class="btn btn--primary" href="assessment.html">
+              <span>Production readiness assessment</span>
+              <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="btn btn--ghost btn--mono" href="mailto:hello@backpropml.com?subject=Backprop%20enquiry">
+              <span>hello@backpropml.com</span>
+            </a>
+          </div>
+          <p class="terms" data-reveal>
+            <span>$5,000</span>
+            <span>one week</span>
+            <span>credited in full against implementation</span>
+          </p>
+        </div>
+
+        <!-- The thing we actually sell, drawn and running. -->
+        <aside class="card tilt" data-reveal="right" data-glow>
+          <div class="card__head">
+            <b>A production ML system</b>
+            <span>live</span>
+          </div>
+          <div style="padding: 1.1rem 1rem 1.25rem">
+            <svg class="pipeline" viewBox="0 0 340 330" role="img" aria-labelledby="pipe-t pipe-d">
+              <title id="pipe-t">A production machine learning system</title>
+              <desc id="pipe-d">Data feeds training, then evaluation, then serving, then
+                monitoring - and monitoring feeds back into retraining.</desc>
+
+              <path class="pipe-track" d="M105,16 V322"/>
+              <path class="pipe-track" d="M180,305 H262 Q276,305 276,291 V115 Q276,101 262,101 H180"/>
+
+              <path class="pipe-flow" pathLength="100" d="M105,16 V322"/>
+              <path class="pipe-flow pipe-flow--loop" pathLength="100"
+                    d="M180,305 H262 Q276,305 276,291 V115 Q276,101 262,101 H180"/>
+
+              <text class="pipe-label" x="292" y="203"
+                    transform="rotate(-90 292 203)" text-anchor="middle">retrain</text>
+
+              <g class="pipe-node">
+                <rect class="halo" x="27" y="13" width="156" height="40" rx="10"/>
+                <rect x="30" y="16" width="150" height="34" rx="8"/>
+                <circle class="dot" cx="47" cy="33" r="3"/>
+                <text x="62" y="34">DATA</text>
+              </g>
+              <g class="pipe-node">
+                <rect class="halo" x="27" y="81" width="156" height="40" rx="10"/>
+                <rect x="30" y="84" width="150" height="34" rx="8"/>
+                <circle class="dot" cx="47" cy="101" r="3"/>
+                <text x="62" y="102">TRAIN</text>
+              </g>
+              <g class="pipe-node">
+                <rect class="halo" x="27" y="149" width="156" height="40" rx="10"/>
+                <rect x="30" y="152" width="150" height="34" rx="8"/>
+                <circle class="dot" cx="47" cy="169" r="3"/>
+                <text x="62" y="170">EVALUATE</text>
+              </g>
+              <g class="pipe-node">
+                <rect class="halo" x="27" y="217" width="156" height="40" rx="10"/>
+                <rect x="30" y="220" width="150" height="34" rx="8"/>
+                <circle class="dot" cx="47" cy="237" r="3"/>
+                <text x="62" y="238">SERVE</text>
+              </g>
+              <g class="pipe-node">
+                <rect class="halo" x="27" y="285" width="156" height="40" rx="10"/>
+                <rect x="30" y="288" width="150" height="34" rx="8"/>
+                <circle class="dot" cx="47" cy="305" r="3"/>
+                <text x="62" y="306">MONITOR</text>
+              </g>
+            </svg>
+          </div>
+          <p class="note" style="padding: 0 1.15rem 1.1rem">
+            Six places this breaks. The assessment checks all of them -
+            <a href="assessment.html">see the scope</a>.
+          </p>
+        </aside>
+
+      </div>
+     </div>
+    </div>
+  </section>
+
+  <!-- ============================ WORK ============================ -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">What we do</span>
+        <h2>Engineers first. Most of what breaks is infrastructure.</h2>
+        <p class="lede">
+          A model that scores well in a notebook and a model that earns its keep in production
+          are different artifacts. We build both, and the path between them - which is usually
+          where the work actually turns out to be.
+        </p>
+      </div>
+
+      <div class="grid grid--2" data-reveal data-stagger>
+        <div class="cell">
+          <span class="cell__n">01</span>
+          <h3>Production pipelines</h3>
+          <p>
+            Training and inference that runs without a human watching it. Orchestration,
+            reproducible builds, retries and idempotency, and a failure story you can page on.
+            End-to-end, from raw data to a served inference.
+          </p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">02</span>
+          <h3>Evaluation &amp; monitoring</h3>
+          <p>
+            Offline and online evaluation harnesses, and the gap between the two measured
+            rather than assumed. Concept and performance drift detection, alerting thresholds
+            tied to a decision someone actually takes, and the dashboards to go with them.
+          </p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">03</span>
+          <h3>Research &amp; prototyping</h3>
+          <p>
+            For when the problem is still open. A first honest baseline, then the modeling
+            that decides whether it is worth deploying at all - computer vision, NLP and
+            recommender systems, plus fine-tuning and evaluation for LLM systems.
+          </p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">04</span>
+          <h3>Data &amp; platform</h3>
+          <p>
+            Lineage, freshness and leakage. Feature and label pipelines. Cloud ML platforms
+            (Vertex AI, AzureML) and the internal services and dashboards that sit around them.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= ASSESSMENT ========================= -->
+  <section class="section section--sunk" id="assessment">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">The starting point</span>
+        <h2>Production readiness assessment</h2>
+        <p class="lede">
+          One week, one system, a fixed price. We review what you have, tell you what stands
+          between it and production, and rank the work by risk. If you hire us to do that work,
+          the fee comes off the first invoice.
+        </p>
+      </div>
+
+      <div class="offer" data-reveal="scale">
+        <div>
+          <p class="price"><b data-count="5000" data-prefix="$">$5,000</b><em>FIXED</em></p>
+          <p class="note">
+            One week, start to finish. Credited in full against implementation
+            work commissioned within 60 days - so if you go ahead, the
+            assessment costs you nothing.
+          </p>
+          <div class="btn-row mt-md">
+            <a class="btn btn--primary" href="assessment.html">
+              <span>Read the full scope</span>
+              <span class="arrow" aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3>What you get</h3>
+          <ul class="checks mt-md">
+            <li>A written assessment: every finding ranked by risk, each with the fix and what it costs to make.</li>
+            <li>A prioritized remediation plan with effort estimates, in an order you can actually staff.</li>
+            <li>A 90-minute walkthrough with your team - engineers, not just the person who signed.</li>
+            <li>Any small fixes we can land inside the week, landed. You keep the code either way.</li>
+          </ul>
+          <p class="note mt-md">
+            <strong>No model yet?</strong> Then the assessment is the wrong first purchase.
+            Research and prototyping is scoped separately -
+            <a href="mailto:hello@backpropml.com?subject=Research%20and%20prototyping">tell us the problem</a>
+            and we will say what it would take.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid--3 mt-lg" data-reveal data-stagger>
+        <div class="cell">
+          <span class="cell__n">01</span>
+          <h3>Reproducibility</h3>
+          <p>Can the model be rebuilt from data and code by someone who isn&rsquo;t the author?</p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">02</span>
+          <h3>Pipeline</h3>
+          <p>What runs unattended, how it fails, and how long you take to notice.</p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">03</span>
+          <h3>Evaluation</h3>
+          <p>Whether the metric you optimize is the one you actually care about.</p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">04</span>
+          <h3>Serving</h3>
+          <p>Latency, cost per request, model versioning and the rollback path.</p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">05</span>
+          <h3>Monitoring</h3>
+          <p>Concept and performance drift, surfaced instead of left silent.</p>
+        </div>
+        <div class="cell">
+          <span class="cell__n">06</span>
+          <h3>Data</h3>
+          <p>Lineage, freshness, leakage, and the upstream change that poisons everything.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== APPROACH ========================== -->
+  <section class="section" id="approach">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">How we work</span>
+        <h2>Four things we hold to.</h2>
+      </div>
+
+      <div class="grid grid--2" data-reveal data-stagger>
+        <div class="cell">
+          <h3>You get both of us</h3>
+          <p>
+            The two people you meet are the two people who do the work, on every engagement,
+            start to finish. No work goes to anyone outside the two of us, and there is no
+            account manager in between.
+          </p>
+        </div>
+        <div class="cell">
+          <h3>Evaluation before optimization</h3>
+          <p>
+            A leaderboard is not generalization. Before anything gets tuned, we check that the
+            metric you are optimizing is the one you care about and that your validation split
+            isn&rsquo;t quietly lying to you.
+          </p>
+        </div>
+        <div class="cell">
+          <h3>We write it down</h3>
+          <p>
+            Every engagement ends in something the next engineer can pick up: the decisions,
+            the trade-offs, and the parts we would do differently with more time.
+          </p>
+        </div>
+        <div class="cell">
+          <h3>Working code, not slides</h3>
+          <p>
+            Deliverables run. We hand back a repository your team owns, in your stack, with
+            tests and a way to deploy it - not a deck describing one.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ TEAM ============================ -->
+  <section class="section section--sunk" id="team">
+    <div class="wrap">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Who we are</span>
+        <h2>Backprop is two engineers.</h2>
+        <p class="lede">
+          One from large-scale production systems, one from competition-grade modeling.
+          Between them, the full range: a prototype that proves the idea, and the pipeline
+          that keeps it alive.
+        </p>
+      </div>
+
+      <div class="people">
+
+        <article class="person" data-reveal="left">
+          <h3>Muhammad Haseeb Ahmad</h3>
+          <p class="role">Production systems &amp; ML engineering</p>
+          <p>
+            A decade across large-scale production systems and applied ML. Built and
+            productionized model pipelines, drift monitoring and a natural-language-to-SQL
+            system in industry; now builds end-to-end imaging, OCR and LLM platforms in a
+            research setting. Named inventor on a granted US patent for a clustering
+            algorithm developed at Afiniti.
+          </p>
+          <ul class="facts">
+            <li><span class="k">Now</span><span>Senior Research Software Engineer, University of Oxford (employment)</span></li>
+            <li><span class="k">Before</span><span>Software Engineer III, Google &middot; ML Engineer, The Home Depot &middot; Afiniti</span></li>
+            <li><span class="k">Study</span><span>MS Computer Science (AI), UC San Diego</span></li>
+            <li><span class="k">Stack</span><span>Python, Go, PyTorch, GCP Vertex AI, AzureML</span></li>
+            <li><span class="k">Patent</span><span><a href="https://patents.google.com/patent/US10135986B1/en">US&nbsp;10,135,986&nbsp;B1</a></span></li>
+            <li><span class="k">Paper</span><span><a href="https://arxiv.org/abs/2604.09370">arXiv:2604.09370</a> - histology labeling (Oxford)</span></li>
+            <li><span class="k">Code</span><span>Oxford: <a href="https://github.com/OxfordCompetencyCenters/edu06_histology_labelling">histology pipeline</a>, <a href="https://github.com/OxfordCompetencyCenters/ashmolean">Ashmolean OCR</a>, <a href="https://github.com/OxfordCompetencyCenters/edu11_scholarlink">Scholarlink</a></span></li>
+            <li><span class="k">Open source</span><span><a href="https://android-review.googlesource.com/q/author:mhahmad%2540google.com">AOSP</a> (build system, device-side Java fuzzing) and <a href="https://github.com/google/clusterfuzz/pulls?q=is%3Apr+author%3AMHA3">ClusterFuzz</a> (6 merged PRs)</span></li>
+            <li><span class="k">Contact</span><span><a href="mailto:mhahmad@backpropml.com">mhahmad@backpropml.com</a></span></li>
+          </ul>
+        </article>
+
+        <article class="person" data-reveal="right">
+          <h3>Mohibullah Kamran</h3>
+          <p class="role">Research, modeling &amp; evaluation</p>
+          <p>
+            Leads the research end. A Kaggle competitor who reaches the top of a leaderboard
+            in domains he has not worked in before - third of 1,950 teams at NeurIPS
+            2024, on small molecule-protein binding, then medals in biomass
+            estimation from pasture imagery and in NFL player-movement inference. The
+            biomass work ran on a small training set, using an ensemble of DINOv3, ConvNeXt,
+            EfficientNet and SigLIP. Formerly a fighter pilot and flight instructor, which is
+            roughly the right instinct for production systems.
+          </p>
+          <ul class="facts">
+            <li>
+              <span class="k"><i class="medal medal--gold" aria-hidden="true"></i>Gold</span>
+              <span><b>3 / 1,950</b> - <a href="https://www.kaggle.com/competitions/leash-BELKA">NeurIPS 2024, BELKA</a>: small molecule-protein binding</span>
+            </li>
+            <li>
+              <span class="k"><i class="medal medal--silver" aria-hidden="true"></i>Silver</span>
+              <span><b>182 / 3,805</b> - <a href="https://www.kaggle.com/competitions/csiro-biomass">CSIRO Image2Biomass</a>: biomass from pasture imagery</span>
+            </li>
+            <li>
+              <span class="k"><i class="medal medal--bronze" aria-hidden="true"></i>Bronze</span>
+              <span><b>161 / 1,899</b> - <a href="https://www.kaggle.com/competitions/nfl-big-data-bowl-2026-prediction">NFL Big Data Bowl 2026</a>: player movement</span>
+            </li>
+            <li><span class="k">Study</span><span>MS Data Science, University of Colorado Boulder</span></li>
+            <li><span class="k">Focus</span><span>Computer vision, ensembling, cross-validation design, robustness</span></li>
+            <li><span class="k">Before</span><span>Fighter pilot and flight instructor</span></li>
+            <li><span class="k">Kaggle</span><span><a href="https://www.kaggle.com/mohib94">kaggle.com/mohib94</a> - profile and full competition history</span></li>
+            <li><span class="k">Contact</span><span><a href="mailto:mohibullah.kamran@backpropml.com">mohibullah.kamran@backpropml.com</a></span></li>
+          </ul>
+        </article>
+
+      </div>
+
+      <!-- Required disclosure: prior work is employment, not Backprop client work. -->
+      <div class="employers" data-reveal>
+        <span class="eyebrow">Where we have worked</span>
+        <ul>
+          <li>Google</li>
+          <li>University of Oxford</li>
+          <li>The Home Depot</li>
+          <li>Afiniti</li>
+          <li>Noon Academy</li>
+        </ul>
+        <p class="note">
+          These are current and former <strong>employers</strong>. They are not Backprop
+          clients and none of them endorse Backprop. Backprop is a new practice; we show no
+          client work, no logos and no testimonials on this site, because we have not yet
+          earned any we are free to publish.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================== CONTACT =========================== -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div class="stack" data-reveal="left">
+          <span class="eyebrow">Get in touch</span>
+          <h2>Tell us what you are trying to ship.</h2>
+          <p class="lede">
+            One email is enough to start. We will tell you honestly whether the assessment is
+            the right first step for you, or whether it isn&rsquo;t.
+          </p>
+          <p>
+            <a class="mail" href="mailto:hello@backpropml.com?subject=Backprop%20enquiry">hello@backpropml.com</a>
+          </p>
+        </div>
+
+        <div class="card tilt" data-reveal="right" data-glow>
+          <div class="card__head"><b>Useful to include</b><span>optional</span></div>
+          <ol class="spec">
+            <li><span class="n">01</span><span class="t">The system</span><span class="d">What it does and roughly how it is built today</span></li>
+            <li><span class="n">02</span><span class="t">The gap</span><span class="d">What &ldquo;in production&rdquo; needs to mean for it</span></li>
+            <li><span class="n">03</span><span class="t">The clock</span><span class="d">When it needs to be there, and what is forcing that</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p>&copy; 2026 <strong>Backprop LLC</strong> &middot; ML infrastructure</p>
+    <nav aria-label="Footer">
+      <a href="assessment.html">Assessment</a>
+      <a href="#team">Team</a>
+      <a href="mailto:hello@backpropml.com?subject=Backprop%20enquiry">Email</a>
+      <a href="#main">Top</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Presentation only. See motion.js - the site is complete without it. -->
+<script src="motion.js" defer></script>
+
+</body>
+</html>
