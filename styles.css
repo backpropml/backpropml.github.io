@@ -49,7 +49,6 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
                "Liberation Mono", monospace;
 
-  --wrap: 70rem;
   --pad: clamp(1.25rem, 5vw, 2.5rem);
   --radius: 14px;
   --radius-lg: clamp(18px, 2.2vw, 28px);
@@ -250,7 +249,6 @@ html:not(.js) .lines .line > span { transform: none; }
 
 .wrap {
   width: 100%;
-  max-width: var(--wrap);
   margin-inline: auto;
   padding-inline: var(--pad);
 }
