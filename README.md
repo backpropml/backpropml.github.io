@@ -60,31 +60,3 @@ python -m http.server 8000
 
 Any static server works. There is nothing to compile.
 
-## Before launch
-
-Search both HTML files for `[[PLACEHOLDER` - every unverified claim is marked
-inline and rendered in a yellow highlight so it cannot ship by accident.
-
-The contact address `hello@backpropml.com` must exist and deliver before this
-goes live. It appears in `index.html`, `assessment.html` and `404.html`.
-
-## Custom domain
-
-To serve from `backpropml.com` instead of `backpropml.github.io`:
-
-1. Point DNS at GitHub Pages (four `A` records for the apex, or a `CNAME` for `www`).
-2. Set the custom domain in **Settings → Pages** - GitHub writes the `CNAME` file itself.
-3. Update the `<link rel="canonical">` and `og:url` tags in `index.html` and `assessment.html`.
-
-Do not add a `CNAME` file before DNS resolves; it takes the site offline until it does.
-
-## Content rules
-
-Enforced on every change - see `CLAUDE.md`:
-
-- No invented metrics, client names, logos or testimonials.
-- Prior work at Google / Oxford / The Home Depot / Afiniti / Noon Academy is
-  **employment**, labelled as such. Never implied to be Backprop client work.
-- Positioning line is "ML infrastructure + research" (infra leads). Short form
-  "ML infrastructure" is fine in footers. Never "AI consulting".
-- Responsive to 375px, visible keyboard focus, `prefers-reduced-motion` respected.
